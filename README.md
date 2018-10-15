@@ -1,0 +1,2 @@
+# nerdschool-express
+Meetup 17. oktober in Bergen. Creating a simple api with express.
