@@ -7,18 +7,24 @@ export let getTvShows = (req: Request, res: Response) => {
 };
 
 export let getTvShowById = (req: Request, res: Response) => {
-  let tvshow = new TvShow("1", "DAvid", Genre.Porn);
-  res.json(tvshow);
+  let id: string = req.params.id;
+  let result: TvShow = TvShowService.getShowById(id);
+  res.json(result);
 };
 
 export let insertTvShow = (req: Request, res: Response) => {
+  //req.params
+  let id = req.params.id;
+  let name = req.params.id;
+  let genre = req.params.genre;
+  console.log(genre, id, name);
   res.send("getTvShowById");
 };
 
 export let deleteTvShowById = (req: Request, res: Response) => {
-  res.send("getTvShowById");
+  res.json(TvShowService.deleteTvShow(req.params.id));
 };
 
 export let updateTvShowById = (req: Request, res: Response) => {
-  res.send("getTvShowById");
+  res.send("tvshow updated");
 };

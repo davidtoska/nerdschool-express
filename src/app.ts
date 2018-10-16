@@ -1,7 +1,12 @@
 import * as express from "express";
 import * as morgan from "morgan";
 import * as bodyParser from "body-parser";
-import { getTvShows, getTvShowById } from "./tvShow/tvShowRouter";
+import { getTvShows, 
+  getTvShowById, 
+  insertTvShow, 
+  deleteTvShowById, 
+  updateTvShowById 
+} from "./tvShow/tvShowRouter";
 
 // Creating the main application
 const app = express();
@@ -20,10 +25,11 @@ app.use(bodyParser.json());
 app.get("/", (req: express.Request, res: express.Response) => {
   res.send("Root of project");
 });
+
 app.get("/tvshow", getTvShows);
 app.get("/tvshow/:id", getTvShowById);
-app.post("/tvshow", getTvShows);
-app.delete("/tvshow", getTvShows);
-app.put("/tvshow/:id", getTvShows);
+app.post("/tvshow", insertTvShow);
+app.delete("/tvshow/:id", deleteTvShowById);
+app.put("/tvshow/:id", updateTvShowById);
 
 export default app;

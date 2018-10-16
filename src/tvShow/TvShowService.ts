@@ -18,7 +18,27 @@ class TvShowService {
   }
 
   getShowById(id: string): TvShow {
-    return this.tvShows[0];
+    let result;
+    console.log(id);
+    this.tvShows.filter(show => {
+      if (show.id === id) {
+        result = show;
+      }
+    });
+    return result;
+  }
+
+  createTvShow(id: string, name: string, genre: Genre): TvShow {
+    let result = new TvShow(id, name, genre);
+    this.tvShows.push(result);
+    return result;
+  }
+
+  deleteTvShow(id: string): TvShow[] {
+    let instance = this.getShowById(id);
+    this.tvShows = this.tvShows.filter(tvShow => tvShow.id !== id);
+
+    return this.tvShows;
   }
 }
 
