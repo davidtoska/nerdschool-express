@@ -1,9 +1,11 @@
+import { create } from "domain";
+
 export enum Genre {
-  Crime,
-  Porn,
-  Talkshow,
-  Propaganda,
-  News
+  Crime = "crime",
+  Porn = "port",
+  Talkshow = "talkshow",
+  Propaganda = "propaganda",
+  News = "news"
 }
 
 class TvShow {
@@ -16,6 +18,14 @@ class TvShow {
     this.name = name;
     this.genre = genre;
   }
+
+  update(tvshow: TvShow) {
+    const copy = { ...tvshow };
+    this.name = copy.name;
+    this.genre = copy.genre;
+    return tvshow;
+  }
+
 }
 
 export default TvShow;

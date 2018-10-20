@@ -1,12 +1,8 @@
 import * as express from "express";
 import * as morgan from "morgan";
 import * as bodyParser from "body-parser";
-import { getTvShows, 
-  getTvShowById, 
-  insertTvShow, 
-  deleteTvShowById, 
-  updateTvShowById 
-} from "./tvShow/tvShowRouter";
+import tvShowRouter from "./tvShow/tvShowRouter";
+import userRouter from "./user/userRouter";
 
 // Creating the main application
 const app = express();
@@ -15,21 +11,23 @@ const app = express();
 app.use(morgan("dev"));
 app.use(bodyParser.json());
 
-// Get all tv shows: GET http://localhost:3000/tvshow/
-// Get single tv show: GET http://localhost:3000/tvshow/{id}/
-// Insert a tv show: POST http://localhost:3000/tvshow/ (The tv show data we will insert is in the request's body)
-// Delete a tv show: DELETE http://localhost:3000/tvshow/{id}/
-// Update a tv show: PUT http://localhost:3000/tvshow/{id}/ (The tv show data we will insert is in the request's body)
+// This syntax could be nice if when?
+app
+  .route("/usersroute")
+  .get((req, res) => { res.send("get all users") })
+  .post((req, res) => { res.send("users post") })
+  .put((req, res) => { res.send("users put"); })
+  .delete((req, res) => { res.send("users delete"); });
+
+
+// Adding users Routers
+app.use("/tvshow", tvShowRouter);
+app.use("/users", userRouter);
+
 
 // Endpoints
 app.get("/", (req: express.Request, res: express.Response) => {
-  res.send("Root of project");
+  res.send("add /tvshow to your url");
 });
-
-app.get("/tvshow", getTvShows);
-app.get("/tvshow/:id", getTvShowById);
-app.post("/tvshow", insertTvShow);
-app.delete("/tvshow/:id", deleteTvShowById);
-app.put("/tvshow/:id", updateTvShowById);
 
 export default app;
