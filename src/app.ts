@@ -4,6 +4,7 @@ import * as bodyParser from "body-parser";
 import tvShowRouter from "./tvShow/tvShowRouter";
 import userRouter from "./user/userRouter";
 
+
 // Creating the main application
 const app = express();
 
@@ -11,23 +12,25 @@ const app = express();
 app.use(morgan("dev"));
 app.use(bodyParser.json());
 
-// This syntax could be nice if when?
-app
-  .route("/usersroute")
-  .get((req, res) => { res.send("get all users") })
-  .post((req, res) => { res.send("users post") })
-  .put((req, res) => { res.send("users put"); })
-  .delete((req, res) => { res.send("users delete"); });
-
-
-// Adding users Routers
+// Routers
 app.use("/tvshow", tvShowRouter);
 app.use("/users", userRouter);
 
 
-// Endpoints
 app.get("/", (req: express.Request, res: express.Response) => {
-  res.send("add /tvshow to your url");
+    res.send("add /tvshow to your url");
 });
 
 export default app;
+
+
+// This syntax could be nice if when?
+// app
+//   .route("/usersroute")
+//   .get((req, res) => { res.send("get all users") })
+//   .post((req, res) => { res.send("users post") })
+//   .put((req, res) => { res.send("users put"); })
+//   .delete((req, res) => { res.send("users delete"); });
+//
+// Adding users Routers
+// Endpoints
